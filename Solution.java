@@ -1,36 +1,18 @@
-public class Solution {
-    public char nextGreatestLetter(char[] letters, char target) {
-        int left = 0;
-        int right = letters.length - 1;
-        int result = 0;
+import java.util.HashMap;
+import java.util.Map;
+
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        Map<Integer, Integer> seen = new HashMap<>(); // value -> index
         
-        while (left <= right) {
-            int mid = left + (right - left) / 2;
-            
-            if (letters[mid] > target) {
-                result = mid;
-                right = mid - 1;
-            } else {
-                left = mid + 1;
+        for (int i = 0; i < nums.length; i++) {
+            int complement = target - nums[i];
+            if (seen.containsKey(complement)) {
+                return new int[] { seen.get(complement), i };
             }
+            seen.put(nums[i], i);
         }
         
-        return letters[result];
-    }
-
-        public static void main(String[] args) {
-        Solution sol = new Solution();
-
-        // Test 1
-        char[] letters1 = {'c', 'f', 'j'};
-        System.out.println(sol.nextGreatestLetter(letters1, 'a')); // Output: c
-
-        // Test 2
-        char[] letters2 = {'c', 'f', 'j'};
-        System.out.println(sol.nextGreatestLetter(letters2, 'c')); // Output: f
-
-        // Test 3
-        char[] letters3 = {'x', 'x', 'y', 'y'};
-        System.out.println(sol.nextGreatestLetter(letters3, 'z')); // Output: x
+        return new int[] {}; // no solution found (per constraints, this won't happen)
     }
 }
